@@ -39,7 +39,7 @@ class Chip:
     Callers must close the chip by calling the close() method when it's no longer
     used.
 
-    Example:
+    Example::
 
         chip = gpiod.Chip(\"/dev/gpiochip0\")
         do_something(chip)
@@ -47,7 +47,7 @@ class Chip:
 
     The gpiod.Chip class also supports controlled execution ('with' statement).
 
-    Example:
+    Example::
 
         with gpiod.Chip(path="/dev/gpiochip0") as chip:
             do_something(chip)
@@ -343,6 +343,12 @@ class Chip:
         ]
 
         return request
+
+    def fileno(self) -> int:
+        """
+        Return the underlying file descriptor.
+        """
+        return self.fd
 
     def __repr__(self) -> str:
         """

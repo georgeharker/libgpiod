@@ -24,7 +24,7 @@ endif
 
 if WITH_TOOLS
 
-SUBDIRS += tools man
+SUBDIRS += tools
 
 endif
 
@@ -44,15 +44,19 @@ SUBDIRS += dbus
 
 endif
 
-if HAS_DOXYGEN
+if WITH_MANPAGES
 
-doc: Doxyfile
-	$(AM_V_GEN)doxygen Doxyfile
-.PHONY: doc
+SUBDIRS += man
 
-clean-local:
-	rm -rf doc
+endif
 
-EXTRA_DIST += Doxyfile
+if WITH_DOCS
+
+SUBDIRS += docs
+
+docs:
+	$(MAKE) -C docs docs
+
+.PHONY: docs
 
 endif

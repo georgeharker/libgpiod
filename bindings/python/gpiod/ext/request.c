@@ -214,8 +214,7 @@ static PyObject *request_set_values(request_object *self, PyObject *args)
 
 	clear_buffers(self);
 
-	// Note: pos may not be contiguous and in pypy, is incremented
-	// past the end of the dict size.
+	/* Note: pos may not be contiguous. */
 	while (PyDict_Next(values, &pos, &key, &val)) {
 		self->offsets[index] = Py_gpiod_PyLongAsUnsignedInt(key);
 		if (PyErr_Occurred())
